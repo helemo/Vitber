@@ -4,6 +4,7 @@ from matplotlib import pyplot as plt
 import pickle
 import scipy.special as ss
 import sympy as sy
+from Vitber.Prosjekt1 import TestEksempel
 
 def fredholm_rhs (xc, F):
     '''Set up the RHS of the system
@@ -158,10 +159,6 @@ class analytical_solution:
             F_eval = F_eval + d*self.cns[n](x_eval) * \
                 (self.antideriv(self.b-x_eval,d,n)-self.antideriv(self.a-x_eval,d,n))
         return F_eval
-
-
-import pickle
-from Vitber.Prosjekt1 import TestEksempel
 
 # define a,b,omega,gamma,Nmax
 try:
