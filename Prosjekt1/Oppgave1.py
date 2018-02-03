@@ -1,5 +1,6 @@
 from math import *
 from matplotlib import pyplot as plt
+import numpy as np
 
 def Y (d):
     y = []
@@ -9,7 +10,7 @@ def Y (d):
     return y
 
 def X ():
-    x = []
+    x = np.array()
     for i in range (101):
         x.append(i/100)
     return x
