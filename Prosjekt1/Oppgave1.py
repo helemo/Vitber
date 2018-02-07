@@ -10,7 +10,7 @@ def Y (d):
     return y
 
 def X ():
-    x = np.array()
+    x = []
     for i in range (101):
         x.append(i/100)
     return x
