@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import pickle
-
 import matplotlib.pyplot as plt
 import numpy as np
 
-# from import analytical_solution
+from Vitber.Prosjekt1.F_analytisk import analytical_solution
 from Vitber.Prosjekt1.metoder import chebyshev, fredholm_lhs, rho
 
 F = pickle.load(open("F.pkl", "rb"))
