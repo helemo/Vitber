@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-# from import analytical_solution
+from Vitber.Prosjekt1.F_analytisk import analytical_solution
 from Vitber.Prosjekt1.metoder import fredholm_lhs, Legendre, Chebyshev
 
 
