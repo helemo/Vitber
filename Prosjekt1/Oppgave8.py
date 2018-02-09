@@ -2,17 +2,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from Vitber.Prosjekt1.F_analytisk import analytical_solution
-from Vitber.Prosjekt1.metoder import fredholm_lhs, Legendre, Chebyshev
+from Vitber.Prosjekt1.metoder import fredholm_lhs8, Legendre, Chebyshev
 
-K = lambda x, y, d:  d * (d**2 + (y-x)**2)**(-3/2)
 
-def Reconstruct_Density(file):
+def Reconstruct_Density(file, K):
     f = open(file, 'rb')
-    d = [0.25, 2.5]
     npzfile = np.load(f)
     xs = Chebyshev(len(npzfile['xc']), npzfile['a'], npzfile['b'])
     xq, w = Legendre(len(npzfile['xc']**2), npzfile['a'], npzfile['b'])
-    A = fredholm_lhs(npzfile['xc'], xs, xq, w)
+    A = fredholm_lhs8(npzfile['xc'], xs, xq, w, K, npzfile['d'])
     r = [npzfile['xc']]
     for i in range(-14, 2):
         print(i)

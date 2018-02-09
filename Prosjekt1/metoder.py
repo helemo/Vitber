@@ -77,3 +77,25 @@ def Legendre(n, a, b):
     xq = [((b-a)*x+b+a)/2 for x in x1]
     w = [0.5*(b-a)*x for x in w1]
     return xq, w
+
+def fredholm_lhs8 (xc, xs, xq, w, K, d):
+    '''
+    Set up the LHS of the system
+    INPUT:
+    xc: collocation points
+    xs: source points
+    xq, w: numerical quadrature
+    K: integral kernel
+    OUTPUT:
+    matrix defining the LHS of the system'''
+    Nc = len(xc)
+    Ns = len(xs)
+    A = np.zeros((Nc, Ns))
+    #FIXIT : implement the function!
+    #Triple for loop to generate the matrix A.
+    for i in range(Nc):
+        for j in range(Ns):
+            for k in range(len(xq)):
+                A[i][j] += K(xc[i], xq[k], d) * w[k] * Lagrange_Basis(j, xq[k], xs, Ns)
+    return A
+
