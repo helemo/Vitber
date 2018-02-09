@@ -1,20 +1,10 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Feb  5 14:45:35 2018
-
-@author: ninabg
-"""
-
-import numpy as np
-import sympy as sy
-import scipy.special as ss
 import pickle
 import time
-import matplotlib.pyplot as plt
-from vitber1_analytiskF import analytical_solution
-from vitber1_funksjoner import chebyshev,Lagrange,rho,K,Newton_Cotes,fredholm_lhs,fredholm_rhs
 
+import matplotlib.pyplot as plt
+import numpy as np
+
+from Vitber.Prosjekt1.metoder import chebyshev, rho, fredholm_lhs, fredholm_rhs
 
 start_t= time.time()
 F = pickle.load( open( "F.pkl", "rb" ) )
@@ -53,44 +43,53 @@ A = fredholm_lhs(xc, xs, xq, w/2)
 B = fredholm_rhs(xc, F_eval1)
 losning = np.linalg.solve(A,B)
 
+
 # analytisk rho uten perturbering
 rho1 = np.linalg.solve(A,F_eval1)
 rho2 = np.linalg.solve(A,F_eval2)
 rho3 = np.linalg.solve(A,F_eval3)
 
-# analytisk rho uten perturbering
+# analytisk rho med perturbering
 rho1_error = np.linalg.solve(A,F_error1)
 rho2_error = np.linalg.solve(A,F_error2)
 rho3_error = np.linalg.solve(A,F_error3)
 
 
-plt.figure()
-plt.plot(xc,F_eval1)
-plt.plot(xc,F_error1)
-plt.plot(xc,F_eval2)
-plt.plot(xc,F_error2)
-plt.plot(xc,F_eval3)
-plt.plot(xc,F_error3)
+plt.figure('F og F med feil')
+plt.plot(xc,F_eval1, label='F ved d = 0.025')
+plt.plot(xc,F_error1, label='F med feil ved d = 0.025')
+plt.plot(xc,F_eval2, label='F ved d = 0.25')
+plt.plot(xc,F_error2, label='F med feil ved d = 0.25')
+plt.plot(xc,F_eval3, label='F ved d = 2.5')
+plt.plot(xc,F_error3, label='F med feil ved d = 2.5')
+plt.legend()
 plt.title('b')
 plt.show()
 
 
 plt.figure()
 plt.plot(xs,analytisk_rho)
+plt.title('Analytisk rho')
 plt.show()
 
 
-plt.figure()
-plt.plot(xs, rho1)
-plt.plot(xs, rho2)
-plt.plot(xs, rho3)
-plt.show()
 
 plt.figure()
-plt.plot(xs, rho1_error)
-plt.plot(xs, rho2_error)
-plt.plot(xs, rho3_error)
+plt.plot(xs, rho1, label='Rho ved d = 0.025')
+plt.plot(xs, rho2, label='Rho ved d = 0.25')
+plt.plot(xs, rho3, label='Rho ved d = 2.5')
+plt.legend()
+plt.title( r'Analytisk $\rho$ uten perturbering')
 plt.show()
+
+plt.figure()
+plt.title( r'Feil i analytisk $\rho$ med perturbering')
+plt.plot(xs, rho1_error, label='Rved d = 0.025')
+plt.plot(xs, rho2_error, label='Rho ved d = 0.25')
+plt.plot(xs, rho3_error, label='Rho ved d = 2.5')
+plt.legend()
+plt.show()
+
 
 
 

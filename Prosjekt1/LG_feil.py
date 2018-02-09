@@ -1,15 +1,10 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jan 30 22:06:03 2018
-
-@author: mariadahle
-"""
-
-import numpy as np
-from prosjekt1_oppg3 import chebyshev,fredholm_lhs,rho,K, Lagrange, fredholm_rhs
 import pickle
+
 import matplotlib.pyplot as plt
-from analytiskF import analytical_solution
+import numpy as np
+from Vitber.Prosjekt1.Vår_kode.F_analytisk import analytical_solution
+
+from Vitber.Prosjekt1.metoder import chebyshev, fredholm_lhs, rho, fredholm_rhs
 
 a = 0
 b = 1
@@ -69,5 +64,3 @@ plt.title('Error med Legendre Gauss')
 plt.plot(Nq,error_list)
 plt.plot('Nq')
 plt.show()
-
-

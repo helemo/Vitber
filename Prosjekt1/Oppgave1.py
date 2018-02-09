@@ -1,34 +1,19 @@
-from math import *
-from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt
 import numpy as np
 
-def Y (d):
-    y = []
-    for i in range (101):
-        x = i/100
-        y.append((2/3-x)/(d*(d**2+(x-2/3)**2)**(1/2))-(1/3-x)/(d*(d**2+(x-1/3)**2)**(1/2)))
-    return y
+x = np.linspace(0,1,100)
 
-def X ():
-    x = []
-    for i in range (101):
-        x.append(i/100)
-    return x
+# Setter inn grenseverdiene rho i funksjonen K
 
-def PlotXY (x, y):
-    for i in range (len(y)):
-        plt.plot(x, y[i])
-    plt.semilogy()
-    plt.show()
+def K(d,x):
+    return (2/3-x)/(d*np.sqrt(d**2+(x-2/3)**2))-(1/3-x)/(d*np.sqrt(d**2+(x-1/3)**2))
 
-
-def main():
-    d = [0.025, 0.25, 2.5]
-    y = []
-    for i in range(len(d)):
-        y.append(Y(d[i]))
-    x = X()
-
-    PlotXY(x, y)
-
-main()
+plt.xlim(0,1)
+plt.semilogy(x,K(0.025,x))
+plt.semilogy(x,K(0.25,x))
+plt.semilogy(x,K(2.5,x))
+plt.legend(['d = 0.025','d = 0.25','d = 2.5'])
+plt.xlabel('x')
+plt.ylabel('F(x)')
+plt.xlim(0,1)
+plt.show()

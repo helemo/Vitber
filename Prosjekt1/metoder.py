@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Feb  2 12:53:56 2018
-
-@author: mariadahle
-"""
 
 import numpy as np
+from math import *
 
 
 def Lagrange(xs, xq, j):
@@ -66,3 +62,18 @@ def chebyshev(a, b, N):
     I = np.arange(1, N + 1, 1)
     X = (b + a) / 2 + (b - a) / 2 * np.cos((2 * I - 1) * np.pi / (2 * N))
     return X
+
+#For the last problem it seemed like it might be relevant to have the option to generate Chebyshev's interpolation
+#nodes in the general range a, b instead of the specific interval [0, 1], so this method is meant to do this.
+def Chebyshev(n, a, b):
+    r = []
+    for i in range(1, n+1):
+        r.append(0.5*(a+b)+0.5*(a-b)*cos(pi*(2*i-1)/(2*n)))
+    return r
+
+#Returns nodes and weights for the legendre gauss quadrature in the generic interval [a, b] for use in problem 8.
+def Legendre(n, a, b):
+    x1, w1 = np.polynomial.legendre.leggauss(n)
+    xq = [((b-a)*x+b+a)/2 for x in x1]
+    w = [0.5*(b-a)*x for x in w1]
+    return xq, w
